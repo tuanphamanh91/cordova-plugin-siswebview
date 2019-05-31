@@ -1,0 +1,14 @@
+{
+  "name": "SISWebview",
+  "version": "0.0.1",
+  "description": "webview popup",
+  "cordova": {
+    "id": "cordova-plugin-siswebview",
+    "platforms": []
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "tuanpa",
+  "license": "ISC"
+}
