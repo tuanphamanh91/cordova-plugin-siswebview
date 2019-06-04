@@ -19,18 +19,56 @@
     NSDictionary *options = [command.arguments objectAtIndex:0];
     NSString *urlStr = options[@"url"] ?: nil;
     NSLog(@"url: %@", urlStr);
+    NSURL *targetURL = [NSURL URLWithString:urlStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
+    
     UIView *blackView = [[UIView alloc] initWithFrame:ROOTVIEW.view.frame];
     blackView.backgroundColor = [UIColor blackColor];
     blackView.alpha = 0.8;
     
-    WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectMake(20, 40, 330, 530) configuration:theConfiguration];
-    NSURL *targetURL = [NSURL URLWithString:urlStr];
-    NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
-    [webView loadRequest:request];
+    UIWebView *_webView = [[UIWebView alloc] init];
+    [_webView loadRequest:request];
     
     [ROOTVIEW.view addSubview:blackView];
-    [ROOTVIEW.view addSubview:webView];
+    [ROOTVIEW.view addSubview:_webView];
+    _webView.translatesAutoresizingMaskIntoConstraints = false;
+    
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem: _webView
+                                  attribute: NSLayoutAttributeLeading
+                                  relatedBy: NSLayoutRelationEqual
+                                     toItem: ROOTVIEW.view
+                                  attribute: NSLayoutAttributeLeading
+                                 multiplier: 1.0f
+                                   constant: 20.f];
+    
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem: _webView
+                                  attribute: NSLayoutAttributeTop
+                                  relatedBy: NSLayoutRelationEqual
+                                     toItem: ROOTVIEW.view
+                                  attribute: NSLayoutAttributeTop
+                                 multiplier: 1.0f
+                                   constant: 50.f];
+    
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem: _webView
+                                  attribute: NSLayoutAttributeTrailing
+                                  relatedBy: NSLayoutRelationEqual
+                                     toItem: ROOTVIEW.view
+                                  attribute: NSLayoutAttributeTrailing
+                                 multiplier: 1.0f
+                                   constant: -20.f];
+    
+    NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem: _webView
+                                  attribute: NSLayoutAttributeBottom
+                                  relatedBy: NSLayoutRelationEqual
+                                     toItem: ROOTVIEW.view
+                                  attribute: NSLayoutAttributeBottom
+                                 multiplier: 1.0f
+                                   constant: -50.f];
+    
+    [ROOTVIEW.view addConstraint:leading];
+    [ROOTVIEW.view addConstraint:top];
+    [ROOTVIEW.view addConstraint:trailing];
+    [ROOTVIEW.view addConstraint:bottom];
 }
 
 @end
