@@ -12,12 +12,12 @@
 }
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command;
-- (void)removeWebview;
+- (void)removeWebview:(CDVInvokedUrlCommand*)command;
 @end
 
 @implementation SISWebview
 
-- (void)removeWebview {
+- (void)removeWebview:(CDVInvokedUrlCommand*)command {
     [blackView removeFromSuperview];
     [_webView removeFromSuperview];
 }
