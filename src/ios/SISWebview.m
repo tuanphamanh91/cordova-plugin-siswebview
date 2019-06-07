@@ -7,12 +7,20 @@
 
 @interface SISWebview : CDVPlugin {
   // Member variables go here.
+    UIView *blackView;
+    UIWebView *_webView;
 }
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command;
+- (void)removeWebview;
 @end
 
 @implementation SISWebview
+
+- (void)removeWebview {
+    [blackView removeFromSuperview];
+    [_webView removeFromSuperview];
+}
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
 {
@@ -22,11 +30,11 @@
     NSURL *targetURL = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
     
-    UIView *blackView = [[UIView alloc] initWithFrame:ROOTVIEW.view.frame];
+    blackView = [[UIView alloc] initWithFrame:ROOTVIEW.view.frame];
     blackView.backgroundColor = [UIColor blackColor];
     blackView.alpha = 0.8;
     
-    UIWebView *_webView = [[UIWebView alloc] init];
+    _webView = [[UIWebView alloc] init];
     [_webView loadRequest:request];
     
     [ROOTVIEW.view addSubview:blackView];
